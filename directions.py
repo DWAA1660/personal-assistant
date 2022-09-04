@@ -1,4 +1,5 @@
-import difflib
+import difflib, wikipedia
+from wikipedia import PageError
 from difflib import SequenceMatcher
 from email.mime import audio
 from playaudio import Audio
@@ -26,4 +27,14 @@ class Directions():
         Audio.play(words)
         
     def google(self, said_word):
-        Audio.play('I googled somthing')
+        words = said_word.split(' ')
+        words.pop(0)
+        words = ' '.join(words)
+        try:
+            results = wikipedia.summary(words, sentences=2)
+        except PageError:
+            Audio.play('No results found')
+            return
+        print(results)
+        
+        Audio.play(results)
