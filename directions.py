@@ -1,4 +1,5 @@
 import difflib, wikipedia, random
+import SMS
 from wikipedia import PageError
 from difflib import SequenceMatcher, get_close_matches
 from email.mime import audio
@@ -11,16 +12,14 @@ class Directions():
             'say',
             'google',
             'repeat',
-            'tell'
+            'tell',
         ]
         for option in options:
             said_word_list = self.said_word.split(' ')
-            if self.similar(said_word_list[0], option) >= 0.5 or self.similar(said_word_list[1], option) >= 0.5 or self.similar(said_word_list[2], option) >= 0.5:
+            if self.similar(said_word_list[0], option) >= 0.5:
                 function = getattr(self, option)
                 function(said_word)
-                return
-            break
-        Audio.play('I dont know what you want sorry')
+
     
     def similar(self, a, b):
         return SequenceMatcher(None, a, b).ratio()
