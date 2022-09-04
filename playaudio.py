@@ -8,12 +8,15 @@ from config import API_TOKEN
 class Audio():
     def __init__(self, *args):
         pass
-    def play(text):
+    def play(text, repeat=False):
 
-        speach = gTTS(text=text, lang='en', slow=False)
-        speach.save('tts.wav')
+        if repeat is False:    
+            speach = gTTS(text=text, lang='en', slow=False)
+            speach.save('tts.wav')
 
-        playsound('tts.wav')
+            playsound('tts.wav')
+        else:
+            playsound('tts.wav')
 
     def speech_to_text(self):
 
