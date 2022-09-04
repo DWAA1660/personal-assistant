@@ -2,7 +2,6 @@ from playsound import playsound
 import json, requests, time
 import sounddevice as sd
 from scipy.io.wavfile import write
-import wavio as wv
 from gtts import gTTS
 from config import API_TOKEN
 class Audio():
