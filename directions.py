@@ -26,7 +26,7 @@ class Directions():
             'repeat',
             'tell',
         ]
-        for option in options:
+        for option in aliases.keys():
             
             said_word_list = self.said_word.split(' ')
             # print(option, said_word_list)
