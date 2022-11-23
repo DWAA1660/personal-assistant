@@ -1,11 +1,7 @@
 from playaudio import Audio
 from directions import Directions
 audio = Audio()
-audio.record()
-text = audio.speech_to_text()
-
-text = str(text)
-text = text.lower()
+text = audio.record()
 
 Directions(text)
 

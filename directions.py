@@ -1,10 +1,22 @@
 import difflib, wikipedia, random
-import SMS
 from wikipedia import PageError
 from difflib import SequenceMatcher, get_close_matches
 from email.mime import audio
 from playaudio import Audio
 from data import jokes, riddles
+
+aliases = {
+    'say': 'say',
+    'hey': 'say',
+    'they': 'say',
+    'google': 'google',
+    'repeat': 'repeat',
+    'tell': 'tell',
+    'lookup': 'google',
+    'what': 'repeat',
+    
+}
+
 class Directions():
     def __init__(self, said_word):
         self.said_word = said_word
@@ -15,11 +27,19 @@ class Directions():
             'tell',
         ]
         for option in options:
+            
             said_word_list = self.said_word.split(' ')
-            if self.similar(said_word_list[0], option) >= 0.5:
+            # print(option, said_word_list)
+            if self.similar(said_word_list[0], option) >= 0.4:
                 function = getattr(self, option)
                 function(said_word)
-
+                return
+        possibilitys = get_close_matches(said_word_list[0], list(aliases.keys()))
+        for possibility in possibilitys:
+            print(possibility)
+            function = getattr(self, possibilitys[possibility])
+            function(said_word)
+            break
     
     def similar(self, a, b):
         return SequenceMatcher(None, a, b).ratio()
