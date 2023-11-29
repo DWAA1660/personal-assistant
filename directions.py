@@ -1,9 +1,10 @@
-import difflib, wikipedia, random
+import difflib, wikipedia
 from wikipedia import PageError
 from difflib import SequenceMatcher, get_close_matches
 from email.mime import audio
 from playaudio import Audio
 from data import jokes, riddles
+import secrets
 
 aliases = {
     'say': 'say',
@@ -73,9 +74,9 @@ class Directions():
             matches = get_close_matches(word, options)
             if matches != []:
                 if 'joke' in matches:
-                    Audio.play(random.choice(jokes))
+                    Audio.play(secrets.SystemRandom().choice(jokes))
                 elif 'riddle' in matches:
-                    Audio.play(random.choice(riddles))
+                    Audio.play(secrets.SystemRandom().choice(riddles))
         
     def repeat(self, said_word):
         Audio.play(text='Repeat', repeat=True)
