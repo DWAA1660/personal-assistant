@@ -71,8 +71,7 @@ class Directions():
         ]
         said_words = said_word.split(' ')
         for word in said_words: 
-            matches = get_close_matches(word, options)
-            if matches != []:
+            if (matches := get_close_matches(word, options)) != []:
                 if 'joke' in matches:
                     Audio.play(secrets.SystemRandom().choice(jokes))
                 elif 'riddle' in matches:
